@@ -1,18 +1,53 @@
+import * as PIXI from 'pixi.js';
+import { stateManager } from '../state/stateManager';
+import { sceneController } from '../sceneController/sceneController';
+
 export class sceneBase {
 
-    private _changeSceneCallback: (sceneType:number) => void = (sceneType) => {};
+    protected _sceneController: sceneController | null = null;
+    protected _stateManager: stateManager | null = null;
+    protected _nextScene: number = 0;
 
-    public update(dt: number) {
-        console.log(dt);
+    protected initialize(container: PIXI.Container) {
     }
 
-    public changeScene(sceneType: number) {
-        if (this._changeSceneCallback) {
-            this._changeSceneCallback(sceneType);
+    protected execute(container: PIXI.Container, dt: number) {
+    }
+
+    protected end(container: PIXI.Container) {
+    }
+
+    protected createSceneController() {
+    }
+
+    protected createStateManager() {
+    }
+
+    public start(container: PIXI.Container) {
+        this.createSceneController();
+        if (this._sceneController) {
+            this._sceneController.setAddChildCallback((value) => {
+                container.addChild(value);
+            });
+        }
+        this.createStateManager();
+        this.initialize(container);
+    }
+
+    public update(container: PIXI.Container, dt: number) {
+        this.execute(container, dt);
+        if (this._stateManager) {
+            this._stateManager.update(this._sceneController, dt);
         }
     }
 
-    public setChangeSceneCallback(callback: () => void) {
-        this._changeSceneCallback = callback;
+    public exit(container: PIXI.Container) {
+        this.end(container);
+        this._stateManager = null;
+        this._sceneController = null;
+    }
+
+    public getNextScene(): number {
+        return this._nextScene;
     }
 }
