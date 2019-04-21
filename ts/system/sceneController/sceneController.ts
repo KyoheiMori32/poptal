@@ -8,9 +8,11 @@ export class sceneController {
         this._addChildCallback = _addChildCallback;
     }
 
-    public addChild(container: PIXI.Container) {
-        if (this._addChildCallback) {
-            this._addChildCallback(container);
+    public addChild(container: PIXI.Container | null) {
+        if (container) {
+            if (this._addChildCallback) {
+                this._addChildCallback(container);
+            }
         }
     }
 
