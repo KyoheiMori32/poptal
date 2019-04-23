@@ -1,27 +1,27 @@
-import { sceneController } from "../sceneController/sceneController";
+import { controllerBase } from "../controller/controllerBase";
 
 export class stateBase {
 
     protected _nextState: number = 0;
 
-    protected initialize(_controller: sceneController | null) {
+    protected initialize(_controller: controllerBase | null) {
     }
 
-    protected execute(_controller: sceneController | null, dt: number) {
+    protected execute(_controller: controllerBase | null, dt: number) {
     }
 
-    protected end(_controller: sceneController | null) {
+    protected end(_controller: controllerBase | null) {
     }
 
-    public start(_controller: sceneController | null) {
+    public start(_controller: controllerBase | null) {
         this.initialize(_controller);
     }
 
-    public update(_controller: sceneController | null, dt: number) {
+    public update(_controller: controllerBase | null, dt: number) {
         this.execute(_controller, dt);
     }
 
-    public exit(_controller: sceneController | null) {
+    public exit(_controller: controllerBase | null) {
         this.end(_controller);
     }
 

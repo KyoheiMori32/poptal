@@ -36,6 +36,9 @@ export class sceneBase {
 
     public update(container: PIXI.Container, dt: number) {
         this.execute(container, dt);
+        if (this._sceneController) {
+            this._sceneController.update(dt);
+        }
         if (this._stateManager) {
             this._stateManager.update(this._sceneController, dt);
         }

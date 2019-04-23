@@ -1,5 +1,5 @@
 import { stateBase } from "./stateBase";
-import { sceneController } from "../sceneController/sceneController";
+import { controllerBase } from "../controller/controllerBase";
 
 export class stateManager {
 
@@ -19,7 +19,7 @@ export class stateManager {
         }
     }
 
-    public update(_controller: sceneController | null, dt: number) {
+    public update(_controller: controllerBase | null, dt: number) {
         if (this._state) {
             if (this._initFlag) {
                 this._state.start(_controller);
@@ -33,6 +33,10 @@ export class stateManager {
                 this._initFlag = true;
             }
         }
+    }
+
+    public getCurrentState(): stateBase | null {
+        return this._state;
     }
 
     protected addState(_state: stateBase) {

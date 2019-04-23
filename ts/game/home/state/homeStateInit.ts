@@ -11,7 +11,10 @@ export class homeStateInit extends homeState {
     }
 
     protected execute(_controller: homeSceneController | null, dt: number) {
-        this._nextState = homeStateManager.eState.wait;
+        if (_controller && _controller.buttonController.isLoad) {
+            _controller.addChild(_controller.buttonController.sprite);
+            this._nextState = homeStateManager.eState.wait;
+        }
     }
 
     protected end(_controller: homeSceneController | null) {
