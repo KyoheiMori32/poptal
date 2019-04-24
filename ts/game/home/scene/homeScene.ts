@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import { sceneBase } from "../../../system/scene/sceneBase";
 import { homeSceneController } from './homeSceneController';
 import { homeStateManager } from '../state/homeStateManager';
+import { button } from '../../../system/button/button';
 
 export class homeScene extends sceneBase {
 
@@ -18,7 +19,12 @@ export class homeScene extends sceneBase {
     }
 
     protected createSceneController() {
-        this._sceneController = new homeSceneController();
+        this._sceneController = new homeSceneController((_button: button) => {
+            const _homeStateManager: homeStateManager = this._stateManager as homeStateManager;
+            if (_homeStateManager) {
+                _homeStateManager.clickButtonEvent(_button);
+            }
+        });
     }
 
     protected createStateManager() {

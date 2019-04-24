@@ -1,5 +1,6 @@
 import { homeState } from "./homeState";
 import { homeSceneController } from "../scene/homeSceneController";
+import { button } from "../../../system/button/button";
 
 export class homeStateWait extends homeState {
 
@@ -12,4 +13,7 @@ export class homeStateWait extends homeState {
     protected end(_controller: homeSceneController | null) {
     }
 
+    public clickButtonEvent(_button: button) {
+        console.log('aaaaaaaaaaaaaaaaaa');
+    }
 }
