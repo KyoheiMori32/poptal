@@ -1,6 +1,8 @@
 import * as PIXI from 'pixi.js';
 import { stateManager } from '../state/stateManager';
 import { sceneController } from '../sceneController/sceneController';
+import { commandExecution } from '../command/commandExecution';
+import { commandData } from '../command/commandData';
 
 export class sceneBase {
 
@@ -8,13 +10,13 @@ export class sceneBase {
     protected _stateManager: stateManager | null = null;
     protected _nextScene: number = 0;
 
-    protected initialize(container: PIXI.Container) {
+    protected initialize() {
     }
 
-    protected execute(container: PIXI.Container, dt: number) {
+    protected execute(dt: number) {
     }
 
-    protected end(container: PIXI.Container) {
+    protected end() {
     }
 
     protected createSceneController() {
@@ -23,19 +25,17 @@ export class sceneBase {
     protected createStateManager() {
     }
 
-    public start(container: PIXI.Container) {
+    public start(_addCommandCallback: (_type: commandExecution.eType, _info: commandData.commonInfo) => void) {
         this.createSceneController();
         if (this._sceneController) {
-            this._sceneController.setAddChildCallback((value) => {
-                container.addChild(value);
-            });
+            this._sceneController.setAddCommand(_addCommandCallback);
         }
         this.createStateManager();
-        this.initialize(container);
+        this.initialize();
     }
 
-    public update(container: PIXI.Container, dt: number) {
-        this.execute(container, dt);
+    public update(dt: number) {
+        this.execute(dt);
         if (this._sceneController) {
             this._sceneController.update(dt);
         }
@@ -44,8 +44,8 @@ export class sceneBase {
         }
     }
 
-    public exit(container: PIXI.Container) {
-        this.end(container);
+    public exit() {
+        this.end();
         this._stateManager = null;
         this._sceneController = null;
     }

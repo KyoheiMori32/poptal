@@ -11,7 +11,7 @@ const _renderer: PIXI.WebGLRenderer | PIXI.CanvasRenderer = PIXI.autoDetectRende
 // stageをつくる
 const _stage: PIXI.Container = new PIXI.Container();
 // SceneManagerを作る
-const _sceneManager: sceneManager = new sceneManager(_stage);
+const _sceneManager: sceneManager = new sceneManager(_renderer, _stage);
 // Canvasを配置
 document.body.appendChild(_renderer.view);
 // Layer設定
@@ -19,7 +19,7 @@ document.body.appendChild(_renderer.view);
 let delta: number = _ticker.lastTime;
 _ticker.add(() => {
     delta = _ticker.lastTime - delta;
-    _sceneManager.update(_stage, delta);
+    _sceneManager.update(_renderer, _stage, delta);
     _renderer.render(_stage);
     delta = _ticker.lastTime;
 });

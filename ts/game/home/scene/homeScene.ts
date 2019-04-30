@@ -6,16 +6,16 @@ import { button } from '../../../system/button/button';
 
 export class homeScene extends sceneBase {
 
-    protected initialize(container: PIXI.Container) {
+    protected initialize() {
         if (this._stateManager) {
             this._stateManager.start(homeStateManager.eState.init);
         }
     }
 
-    protected execute(container: PIXI.Container, dt: number) {
+    protected execute(dt: number) {
     }
 
-    protected end(container: PIXI.Container) {
+    protected end() {
     }
 
     protected createSceneController() {

@@ -14,6 +14,6 @@ export class homeStateWait extends homeState {
     }
 
     public clickButtonEvent(_button: button) {
-        console.log('aaaaaaaaaaaaaaaaaa');
+        console.log('aaaaaaaaaaaa');
     }
 }
