@@ -3,7 +3,7 @@ import { controllerBase } from '../controller/controllerBase';
 
 export class buttonController extends controllerBase {
 
-    private _layout: PIXI.Container | null = null;
+    private _layout: PIXI.Graphics | null = null;
     private _sprite: PIXI.Sprite | null = null;
     private _path: string | null = null;
     private _width: number = 0;
@@ -35,11 +35,21 @@ export class buttonController extends controllerBase {
     }
 
     public load() {
-        this._layout = new PIXI.Container();
+        this._layout = new PIXI.Graphics();
         this._layout.width = this._width;
         this._layout.height = this._height;
         this._layout.x = this._width / 2;
         this._layout.y = this._height / 2;
+        this._layout.beginFill(0xFFFFFF);
+        this._layout.drawRect(-this._layout.x, -this._layout.y, this._width, this._height);
+        this._layout.endFill();
+        this._layout.interactive = true;
+        // Pointers normalize touch and mouse
+        this._layout.on('pointerdown', () => {
+            if (this._onClick) {
+                this._onClick();
+            }
+        });
         if (this._path) {
             this._sprite = PIXI.Sprite.fromImage(this._path);
         }
@@ -47,16 +57,6 @@ export class buttonController extends controllerBase {
             this._layout.addChild(this._sprite);
             // Set the initial position
             this._sprite.anchor.set(0.5);
-            // Opt-in to interactivity
-            this._sprite.interactive = true;
-            // Shows hand cursor
-            this._sprite.buttonMode = true;
-            // Pointers normalize touch and mouse
-            this._sprite.on('pointerdown', () => {
-                if (this._onClick) {
-                    this._onClick();
-                }
-            });
             this._loadFlag = true;
         }
     }
