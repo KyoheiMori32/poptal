@@ -21,7 +21,7 @@ export class homeSceneController extends sceneController {
     }
 
     public initialize() {
-        this._button.initialize('assets/pipo-map001_at-yama3.png', () => {
+        this._button.initialize('assets/pipo-map001_at-yama3.png', 500, 500, () => {
             if (this._clickEvent) {
                 this._clickEvent(this._button);
             }

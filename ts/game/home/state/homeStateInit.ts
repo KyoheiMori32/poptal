@@ -14,7 +14,7 @@ export class homeStateInit extends homeState {
     protected execute(_controller: homeSceneController | null, dt: number) {
         if (_controller && _controller.buttonController.isLoad) {
             const _info: commandExecution.addChildInfo = {
-                _container: _controller.buttonController.sprite,
+                _container: _controller.buttonController.layout,
             };
             _controller.addCommand(commandExecution.eType.AddChild, _info);
             this._nextState = homeStateManager.eState.wait;

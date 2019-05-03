@@ -1,5 +1,4 @@
 import { buttonController } from "./buttonController";
-import { stateManager } from "../state/stateManager";
 import { buttonStateManager } from "./state/buttonStateManager";
 
 export class button {
@@ -10,8 +9,8 @@ export class button {
         return this._controller;
     }
 
-    public initialize(_path: string, _onClick: () => void) {
-        this._controller.initialize(_path, () => {
+    public initialize(_path: string, _width: number, _height: number, _onClick: () => void) {
+        this._controller.initialize(_path, _width, _height, () => {
             this._buttonStateManager.onClick(_onClick);
         });
         this._buttonStateManager.start(buttonStateManager.eState.init);
