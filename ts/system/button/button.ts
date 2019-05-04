@@ -17,6 +17,7 @@ export class button {
     }
 
     public update(dt: number) {
+        this._controller.thumbnail.update(dt);
         this._buttonStateManager.update(this._controller, dt);
     }
 }
