@@ -42,4 +42,10 @@ export class stateManager {
     protected addState(_state: stateBase) {
         this._stateList.push(_state);
     }
+
+    public resizeWindow(_width: number, _height: number) {
+        if (this._state) {
+            this._state.resizeWindow(_width, _height);
+        }
+    }
 }

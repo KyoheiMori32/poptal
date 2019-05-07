@@ -53,4 +53,10 @@ export class sceneBase {
     public getNextScene(): number {
         return this._nextScene;
     }
+
+    public resizeWindow(_width: number, _height: number) {
+        if (this._stateManager) {
+            this._stateManager.resizeWindow(_width, _height);
+        }
+    }
 }

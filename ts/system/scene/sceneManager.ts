@@ -58,4 +58,10 @@ export class sceneManager {
     public addScene(_scene: sceneBase) {
         this._sceneList.push(_scene);
     }
+
+    public resizeWindow(_width: number, _height: number) {
+        if (this._scene) {
+            this._scene.resizeWindow(_width, _height);
+        }
+    }
 }

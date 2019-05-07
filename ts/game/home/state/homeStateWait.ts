@@ -13,13 +13,7 @@ export class homeStateWait extends homeState {
 
     protected execute(_controller: homeSceneController | null, dt: number) {
         if (this._clickFlag) {
-            if (_controller) {
-                const _info: commandExecution.resizeWindowInfo = {
-                    _width: 500,
-                    _height: 500,
-                }
-                _controller.addCommand(commandExecution.eType.ResizeWindow, _info);
-            }
+            console.log('click');
         }
         this._clickFlag = false;
     }
