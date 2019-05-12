@@ -1,7 +1,7 @@
 import { stateBase } from '../../../system/state/stateBase';
 import { button } from '../../../system/button/button';
 import { homeSceneController } from '../scene/homeSceneController';
-import { commandExecution } from '../../../system/command/commandExecution';
+import { sceneCommandExecution } from '../../../system/scene/command/sceneCommandExecution';
 
 export class homeState extends stateBase {
 
@@ -11,11 +11,13 @@ export class homeState extends stateBase {
             const _col: number = _div > 7 ? 8 : _div;
             _controller.layout.resetPosition(_col, 100, 100);
             // キャンバスサイズ変更コマンド登録
-            const _info: commandExecution.resizeWindowInfo = {
+            const _info: sceneCommandExecution.resizeWindowInfo = {
+                _renderer: null,
+                _root: null,
                 _width: _width,
                 _height: _controller.layout.row * 100,
             }
-            _controller.addCommand(commandExecution.eType.ResizeWindow, _info);
+            _controller.addCommand(sceneCommandExecution.eType.ResizeWindow, _info);
         }
     }
 

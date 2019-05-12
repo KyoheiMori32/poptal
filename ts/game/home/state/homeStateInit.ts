@@ -1,8 +1,8 @@
 import { homeState } from "./homeState";
 import { homeSceneController } from "../scene/homeSceneController";
 import { homeStateManager } from "./homeStateManager";
-import { commandExecution } from "../../../system/command/commandExecution";
 import { buttonController } from "../../../system/button/buttonController";
+import { sceneCommandExecution } from "../../../system/scene/command/sceneCommandExecution";
 
 export class homeStateInit extends homeState {
 
@@ -26,10 +26,12 @@ export class homeStateInit extends homeState {
             if (_loadFlag) {
                 for (let i: number = 0; i < _buttonControllerLength; ++i) {
                     const _buttonController: buttonController = _controller.getButtonController(i);
-                    const _info: commandExecution.addChildInfo = {
+                    const _info: sceneCommandExecution.addChildInfo = {
+                        _renderer: null,
+                        _root: null,
                         _container: _buttonController.thumbnail.controller.background,
                     };
-                    _controller.addCommand(commandExecution.eType.AddChild, _info);
+                    _controller.addCommand(sceneCommandExecution.eType.AddChild, _info);
                     if (_buttonController.thumbnail.controller.background) {
                         _controller.layout.addChild(_buttonController.thumbnail.controller.background);
                     }
