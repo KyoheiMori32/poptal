@@ -1,8 +1,9 @@
 import { homeState } from "./homeState";
 import { homeSceneController } from "../scene/homeSceneController";
 import { button } from "../../../system/button/button";
-import { commandExecution } from "../../../system/command/commandExecution";
 import { apiClient } from "../../../system/apiClient/apiClient";
+import homeMockData from "../../../../assets/mock/homeMockData.json";
+export type HomeMockData = typeof import("../../../../assets/mock/homeMockData.json");
 
 export class homeStateWait extends homeState {
 
@@ -16,9 +17,7 @@ export class homeStateWait extends homeState {
         if (this._clickFlag) {
             const test: apiClient = new apiClient();
             test.get('/users', { params: { searchText: 'John' } }, {
-                users: [
-                    { id: 1, name: 'John Smith' }
-                ]
+                users: homeMockData
             }).then((response) => {
                 console.log(response.data);
             }).catch((error) => {

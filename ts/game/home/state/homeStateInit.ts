@@ -26,16 +26,17 @@ export class homeStateInit extends homeState {
             if (_loadFlag) {
                 for (let i: number = 0; i < _buttonControllerLength; ++i) {
                     const _buttonController: buttonController = _controller.getButtonController(i);
-                    const _info: sceneCommandExecution.addChildInfo = {
-                        _renderer: null,
-                        _root: null,
-                        _container: _buttonController.thumbnail.controller.background,
-                    };
-                    _controller.addCommand(sceneCommandExecution.eType.AddChild, _info);
                     if (_buttonController.thumbnail.controller.background) {
                         _controller.layout.addChild(_buttonController.thumbnail.controller.background);
                     }
                 }
+                const _info: sceneCommandExecution.addChildInfo = {
+                    _renderer: null,
+                    _root: null,
+                    _container: _controller.layout.root,
+                };
+                _controller.addCommand(sceneCommandExecution.eType.AddChild, _info);
+                _controller.layout.root.x = window.innerWidth / 2;
                 this._nextState = homeStateManager.eState.wait;
             }
         }
